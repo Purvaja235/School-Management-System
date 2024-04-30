@@ -19,6 +19,16 @@ source myenv/bin/activate
 
 ```
 
+## 3. Create virtualenv in windows NOTE: switch to cmd instead of powershell
+
+```
+python -m venv env
+
+env\Scripts\activate
+
+
+```
+
 ## 3. Move to project directory
 
 ```

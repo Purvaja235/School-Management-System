@@ -1,0 +1,203 @@
+{% extends "sms_dashboard/base.html" %}
+{% load static %}
+{% block title %}
+ID Card | Generate
+{% endblock title %}
+
+{% block internal_css %}
+
+<style>
+    .max-width-600{
+        max-width:600px;
+    }
+    .id-card-wrapper{
+     
+        position:relative;
+        height:500px;
+        width:345px;
+    }
+    .id-card-background{
+        height:inherit;
+        position:absolute;
+
+    }
+    {% comment %} .user-default-img{
+        position:absolute;
+        height:180px;
+
+        top:50px;
+        left:50%;
+        transform:translateX(-50%);
+
+
+    } {% endcomment %}
+    .user-info{
+        position:absolute;
+        z-index:3;
+        color:darkblue;
+        font-weight:bolder;
+        bottom:50px;
+        left:80px;
+        font-size: 1.2rem;
+    }
+
+    .user-image{
+        position: absolute;
+        top: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 200px;
+        width: 200px;
+        z-index: 5;
+        border: 2px solid white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 6px;
+
+        .user-default-img{
+            height: 190px;
+            object-fit: cover;
+            overflow: hidden;
+        }
+    }
+
+     @media screen and (max-width:1000px){
+        .gen-id-card{
+            flex-direction:column;
+        }
+    } 
+
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+
+{% endblock internal_css %}
+
+
+{% block content %}
+    
+
+
+    <div class="d-flex" >
+        <div class=" max-width-600" >
+            <form action="" class="d-flex align-items-center gap-2"  >
+                <div class="form-group my-2">
+                <input type="text" class="form-control py-1" id="search_name" name="search_name" placeholder="student's name" autofocus >
+                </div>
+        
+                <button class="btn btn-primary btn-sm my-3 " type="submit">Search</button>
+        
+        
+            </form>
+            {% if students %}
+                <div class="d-flex flex-column">
+                {% for student in students %}
+                <hr>
+                    <div class="student-info" id="{{student.id}}" >
+                        <div>Name : <span class="name">{{student.name|capfirst}}</span></div>
+                        <div>Address : <span class="address">{{student.address}}</span></div>
+                        <div>Phone : <span class="phone_no">{{student.phone_no}}</span></div>
+                        <div>Gender : <span class="gender">{{student.gender|capfirst}}</span></div>
+                        <div>DOB : <span class="dob">{{student.dob}}</span></div>
+
+                        <input type="hidden" name="image_url" 
+                        value="{% if student.image %}{{student.image.url}}{% endif %}" >
+
+                        <button class="btn btn-primary btn-sm my-2" 
+                        onclick="preview(this)">Preview</button>
+                
+                    
+
+                    </div>
+                
+                <hr>
+                {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        <div class="d-flex flex-column ">
+            <div class="  id-card-wrapper " id="id-card-wrapper" >
+                <img src="{% static "sms_dashboard/images/id_card.png" %}" class="id-card-background"  />
+                <div class="user-image">
+                    <img src="{% static "sms_dashboard/images/default_user/user.jpg" %}"  class="user-default-img" id="user-default-img"   />
+                </div>
+                <div class="user-info" id="user-info">
+                    Name :  <span></span> <br>
+                    Address : <span></span> <br>
+                    Phone : <span></span><br>
+                    Gender : <span></span><br>
+                    DOB : <span></span>
+                </div>
+                
+
+            </div>
+            <button class="btn btn-primary btn-sm my-2" onclick="saveAsPng()">Download</button>
+        </div>
+    </div>
+       
+
+{% endblock content %}
+
+
+{% block internal_scripts %}
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+<script>
+        {% comment %} function preview(e){
+            const parentEl = e.currentTarget
+            console.log(parentEl)
+        } {% endcomment %}
+        function preview(element) {
+            const parentEl = element.parentElement
+
+            const infos = parentEl.querySelectorAll("span")
+            
+            let student_info = []
+
+            for(let i=0; i<infos.length; i++){
+                
+                student_info[i] = infos[i].innerText
+
+            }
+
+            const id_card = document.getElementById("user-info")
+            const blank_fields = id_card.querySelectorAll("span")
+
+            for(let i=0; i<blank_fields.length;i++){
+                blank_fields[i].innerText = student_info[i]
+
+            }
+
+            let id_card_image_el = document.getElementById("user-default-img")
+            
+            let image_url = parentEl.querySelector("input").value
+            image_url_full = "http://127.0.0.1:8000/"+image_url
+            fetch(image_url_full).then((image)=>id_card_image_el.src=image.url)
+
+            
+
+
+
+        }
+
+
+        function saveAsPng() {
+            console.log("hello")
+            const node = document.getElementById("id-card-wrapper");
+            domtoimage.toPng(node)
+              .then(function(dataUrl) {
+                  var link = document.createElement("a");
+                  link.download = "screenshot.png";
+                  link.href = dataUrl;
+                  link.click();
+              })
+              .catch(function(error) {
+                  console.error("Error: ", error);
+              });
+          }
+</script>
+
+{% endblock internal_scripts %}

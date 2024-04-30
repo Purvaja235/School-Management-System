@@ -1,0 +1,134 @@
+{% extends "sms_dashboard/base.html" %}
+{% load static %}
+{% block title %}Edit | Staff{% endblock title %}
+{% block internal_css %}
+
+<style>
+
+    .image{
+        height:310px;
+        .upload-image{
+            border-radius:10px;
+            height:inherit;
+            object-fit:cover;
+        }
+    }
+
+</style>
+
+{% endblock internal_css %}
+
+
+
+{% block content %}
+<h5>Edit {{staff.name}}'s info             <button class="btn btn-primary btn-sm" onclick="window.location.href='{% url 'sms_dashboard:students' %}'">Back</button>
+</h5>
+
+    <form action="" method="POST" enctype="multipart/form-data" class="d-flex gap-5 " >
+        <div>
+            {% csrf_token %}
+        
+            {% if messages %}
+            {% for message in messages %}
+                {% if message.tags == 'success' %}
+                    <p>{{ message }}</p>
+                {% endif %}
+            {% endfor %}
+            {% endif %}
+        
+        
+            {% if error %}
+            <p class="warning" >{{error}} </p>
+            
+            {% endif %}
+            <div class="form-group my-2">
+            <input type="text" class="form-control" id="name" name="name" placeholder="{{staff.name}}" autofocus >
+            </div>
+            <div class="form-group my-2">
+            <input type="text" class="form-control" id="address" name="address" placeholder="{{staff.address}}" >
+            </div>
+            <div class="form-group my-2">
+            <input type="number" class="form-control" id="phone_no" name="phone_no" placeholder="{{staff.phone_no}}" >
+            </div>  
+            <div class="form-group my-3 ">
+                
+                <div class="d-flex gap-3 mt-2" >
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" id="male" value="male" {% if staff.gender == "male" %}checked{% endif %}  >
+                        <label class="form-check-label" for="male">
+                        Male
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" id="female" value="female"  {% if staff.gender == "female" %}checked{% endif %}  >
+                        <label class="form-check-label" for="female">
+                        Female
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" id="rather_not_say" value="rather_not_say"  {% if staff.gender == "rather_not_say" %}checked{% endif %}  >
+                        <label class="form-check-label" for="rather_not_say">
+                        Rather not say
+                        </label>    
+                    </div>
+                </div>
+            </div>
+            <div class="form-group my-2">
+            <input type="email" class="form-control" id="email" name="email" placeholder="{{staff.email}}" >
+            </div>
+            
+            <div class="form-floating my-2">
+                <input type="date" class="form-control" id="dob" name="dob" placeholder="{{staff.dob|date:'m/d/y'}}" >
+                <label>{{student.dob|date:'m/d/Y'}}</label>
+            </div>
+            <select class="form-select form-select-lg mb-3" aria-label="Staff position selection" name="position">
+                <option value="senior_teacher" {% if staff.position == "senior_teacher" %} selected {% endif %}  >Senior Teacher</option>
+                <option value="junior_teacher" {% if staff.position == "junior_teacher" %} selected {% endif %}  >Junior Teacher</option>
+                <option value="primary_staff"  {% if staff.position == "primary_staff" %} selected {% endif %}  >Primary Staff</option>
+                <option value="secondary_staff"  {% if staff.position == "secondary_staff" %} selected {% endif %}  >Secondary Staff</option>
+                <option value="driver"  {% if staff.position == "driver" %} selected {% endif %}  >Driver</option>
+                <option value="sub_driver"  {% if staff.position == "sub_driver" %} selected {% endif %}  >Sub-driver</option>
+              </select>
+
+        
+        
+            <button class="btn btn-primary w-100 py-2 my-3" type="submit">Update</button>
+        </div>
+
+        <div class="d-flex flex-column gap-3">
+            <div class="image " >
+                {% if staff.image %}
+                <img class="upload-image" id="imagePreview"  src="{{staff.image.url}}" alt="avatar"  />
+                {% else %}
+                <img class="upload-image" id="imagePreview"  src="{% static "sms_dashboard/images/default_user/user.jpg" %}" alt="avatar"  />
+                {% endif %}
+            </div>
+            <input type="file" name="staff_photo" id="staff_photo" accept="image/*"/>
+        </div>
+
+    </form>
+
+      
+
+
+{% endblock content %}
+
+
+{% block internal_scripts %}
+      <script>
+        document.getElementById('staff_photo').addEventListener('change', function(event) {
+            var file = event.target.files[0];
+            var reader = new FileReader();
+            
+            reader.onload = function(e) {
+                var imgElement = document.getElementById('imagePreview');
+                imgElement.src = e.target.result;
+                imgElement.style.display = 'block';
+            };
+            
+            reader.readAsDataURL(file);
+        });
+        
+      </script>
+
+{% endblock internal_scripts %}

@@ -1,0 +1,71 @@
+{% extends 'sms_dashboard/base.html' %}
+
+{% block title %}
+  Add | Staff
+{% endblock %}
+
+{% block content %}
+  <form action="" method="POST">
+    {% csrf_token %}
+
+    {% if messages %}
+      {% for message in messages %}
+        {% if message.tags == 'success' %}
+          <p>{{ message }}</p>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    <h1 class="h3 mb-3 fw-normal">Add new Staff</h1>
+    {% if error %}
+      <p class="warning">{{ error }}</p>
+    {% endif %}
+    <div class="form-floating my-2">
+      <input type="text" class="form-control" id="name" name="name" placeholder="name" autofocus />
+      <label for="name">Name</label>
+    </div>
+    <div class="form-floating my-2">
+      <input type="text" class="form-control" id="address" name="address" placeholder="address" />
+      <label for="address">Address</label>
+    </div>
+    <div class="form-floating my-2">
+      <input type="number" class="form-control" id="phone_no" name="phone_no" placeholder="phone_no" />
+      <label for="phone_no">Phone No.</label>
+    </div>
+    <div class="form-floating my-3">
+      <div class="d-flex gap-3 mt-2">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" id="male" value="male" checked />
+          <label class="form-check-label" for="male">Male</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" id="female" value="female" />
+          <label class="form-check-label" for="female">Female</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" id="rather_not_say" value="rather_not_say" />
+          <label class="form-check-label" for="rather_not_say">Rather not say</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-floating my-2">
+      <input type="email" class="form-control" id="email" name="email" placeholder="email" />
+      <label for="email">Email</label>
+    </div>
+    <div class="form-floating my-2">
+      <input type="date" class="form-control" id="dob" name="dob" placeholder="date of birth" />
+      <label for="dov">Date of Birth</label>
+    </div>
+
+    <select class="form-select form-select-lg mb-3" aria-label="Staff position selection" name="position">
+      <option value="senior_teacher" selected>Senior Teacher</option>
+      <option value="junior_teacher">Junior Teacher</option>
+      <option value="primary_staff">Primary Staff</option>
+      <option value="secondary_staff">Secondary Staff</option>
+      <option value="driver">Driver</option>
+      <option value="sub_driver">Sub-driver</option>
+    </select>
+
+    <button class="btn btn-primary w-100 py-2 my-3" type="submit">Add Staff</button>
+  </form>
+{% endblock %}

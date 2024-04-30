@@ -1,0 +1,48 @@
+{% extends 'sms_dashboard/base.html' %}
+
+{% block title %}
+  Students
+{% endblock %}
+
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Enrolled Students to Classes</h2>
+    <div class="d-flex align-items-center gap-3">
+      <form action="" class="d-flex align-items-center gap-2">
+        <div class="form-group my-2">
+          <input type="text" class="form-control py-1" id="student_name" name="student_name" placeholder="student's name" autofocus />
+        </div>
+
+        <button class="btn btn-primary btn-sm my-3" type="submit">Search</button>
+      </form>|<form action="" class="d-flex align-items-center gap-2">
+        <div class="form-group my-2">
+          <input type="text" class="form-control py-1" id="class_name" name="class_name" placeholder="class's name" />
+        </div>
+
+        <button class="btn btn-primary btn-sm my-3" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+  <div class="table-responsive small">
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Student Name</th>
+          <th scope="col">Class Name</th>
+          <th scope="col">Joined Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for sc in students_classes %}
+          <tr>
+            <td>{{ sc.id }}</td>
+            <td>{{ sc.student.name }}</td>
+            <td>{{ sc.classes.name }}</td>
+            <td>{{ sc.date }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

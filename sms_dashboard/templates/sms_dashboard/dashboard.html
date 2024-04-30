@@ -1,0 +1,40 @@
+{% extends 'sms_dashboard/base.html' %} {% block title %}
+  Dashboard
+{% endblock %} {% block internal_css %}
+  <style>
+    a {
+      text-decoration: none;
+      color: black;
+    }
+    a:hover {
+      background-color: none;
+    }
+  </style>
+{% endblock %} {% block content %}
+  <div class="d-flex justify-content-evenly gap-3">
+    <a class="flex-grow-1 d-flex justify-content-center" href="{% url 'sms_dashboard:students' %}">
+      <div class="card text-bg-info mb-3 flex-grow-1" style="max-width: 18rem;">
+        <h5 class="card-header">Students</h5>
+        <div class="card-body d-flex justify-content-center align-items-center">
+          <h1 class="card-text">{{ total_students }}</h1>
+        </div>
+      </div>
+    </a>
+    <a class="flex-grow-1 d-flex justify-content-center" href="{% url 'sms_dashboard:staffs' %}">
+      <div class="card text-bg-info mb-3 flex-grow-1" style="max-width: 18rem;">
+        <h5 class="card-header">Staffs</h5>
+        <div class="card-body d-flex justify-content-center align-items-center">
+          <h1 class="card-text">{{ total_staffs }}</h1>
+        </div>
+      </div>
+    </a>
+    <a class="flex-grow-1 d-flex justify-content-center" href="{% url 'sms_dashboard:classes' %}">
+      <div class="card text-bg-info mb-3 flex-grow-1" style="max-width: 18rem;">
+        <h5 class="card-header">Classes</h5>
+        <div class="card-body d-flex justify-content-center align-items-center">
+          <h1 class="card-text">{{ total_classes }}</h1>
+        </div>
+      </div>
+    </a>
+  </div>
+{% endblock %}

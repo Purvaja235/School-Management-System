@@ -190,7 +190,7 @@ ID Card | Generate
             domtoimage.toPng(node)
               .then(function(dataUrl) {
                   var link = document.createElement("a");
-                  link.download = "screenshot.png";
+                  link.download = "Id-card.png";
                   link.href = dataUrl;
                   link.click();
               })

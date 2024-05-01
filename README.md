@@ -2,9 +2,44 @@
 
 ## What this system looks like:
 
-<!-- <img src="static/sms_dashboard/"> -->
+### 1. Login
 
-### Follow the instructions to run this system
+ <img src="https://github.com/prakashtaz0091/school-management-system/blob/master/sms_dashboard/static/sms_dashboard/images/demo1.png" height="100%" /> 
+ 
+###  2. Dashboard
+ <img src="https://github.com/prakashtaz0091/school-management-system/blob/master/sms_dashboard/static/sms_dashboard/images/demo2.png" height="100%" /> 
+ 
+###  3. Dashboard - Light Mode
+ <img src="https://github.com/prakashtaz0091/school-management-system/blob/master/sms_dashboard/static/sms_dashboard/images/demo3.png" height="100%" /> 
+ 
+###  4. Admit new student
+ <img src="https://github.com/prakashtaz0091/school-management-system/blob/master/sms_dashboard/static/sms_dashboard/images/demo4.png" height="100%"/>
+
+### 5. View Students
+
+ <img src="https://github.com/prakashtaz0091/school-management-system/blob/master/sms_dashboard/static/sms_dashboard/images/demo5.png" height="100%" />
+
+### 6. Generate ID card
+
+ <img src="https://github.com/prakashtaz0091/school-management-system/blob/master/sms_dashboard/static/sms_dashboard/images/demo6.png" height="100%" />
+
+### 7. Preview and Download ID card as .png
+
+ <img src="https://github.com/prakashtaz0091/school-management-system/blob/master/sms_dashboard/static/sms_dashboard/images/demo7.png" height="100%" />
+
+### 8. Add new Staff
+
+ <img src="https://github.com/prakashtaz0091/school-management-system/blob/master/sms_dashboard/static/sms_dashboard/images/demo8.png" height="100%" />
+
+### 9. Add new Class
+
+ <img src="https://github.com/prakashtaz0091/school-management-system/blob/master/sms_dashboard/static/sms_dashboard/images/demo9.png" height="100%" />
+
+### 10. View enrolled students
+
+ <img src="https://github.com/prakashtaz0091/school-management-system/blob/master/sms_dashboard/static/sms_dashboard/images/demo10.png" height="100%" />
+
+## Follow the instructions to run this system
 
 ## 1. Clone this repo
 

@@ -1,5 +1,9 @@
 # School Management System
 
+## What this system looks like:
+
+<!-- <img src="static/sms_dashboard/"> -->
+
 ### Follow the instructions to run this system
 
 ## 1. Clone this repo

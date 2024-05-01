@@ -19,7 +19,7 @@
 
  <img src="https://github.com/prakashtaz0091/school-management-system/blob/master/sms_dashboard/static/sms_dashboard/images/demo5.png" height="100%" />
 
-### 6. Generate ID card
+### 6. Edit student's info
 
  <img src="https://github.com/prakashtaz0091/school-management-system/blob/master/sms_dashboard/static/sms_dashboard/images/demo6.png" height="100%" />
 
